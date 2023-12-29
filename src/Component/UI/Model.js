@@ -4,7 +4,7 @@ import classes from './Model.module.css'
 
 const Backdrop = (props) => {
   return (
-    <div className={classes.blackdrop} />
+    <div className={classes.blackdrop} onClick={props.hideCart} />
   );
 }
 
@@ -19,12 +19,12 @@ const ModalOverlay = (props) => {
 const portalElement = document.getElementById('overlays');
 
 export default function Model(props) {
-  
+
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(<Backdrop />, portalElement)}
+      {ReactDOM.createPortal(<Backdrop hideCart={props.hideCart} />, portalElement)}
       {ReactDOM.createPortal(
-        <ModalOverlay>{props.children}</ModalOverlay>,
+        <ModalOverlay>{props.children} </ModalOverlay>,
         portalElement
       )}
     </React.Fragment>
