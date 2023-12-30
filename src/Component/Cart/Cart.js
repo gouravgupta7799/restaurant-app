@@ -1,15 +1,24 @@
 import React, { useContext } from 'react'
 import classes from './Cart.module.css'
 import Model from '../UI/Model';
-import { CartContext } from '../Store/cart-context'
+import { CartContext } from '../Store/cart-context';
+import { CartItems } from './CartItems';
+
 
 export default function Cart(props) {
 
   const cartitemsCtx = useContext(CartContext);
 
   const CartItem = (<ul className={classes['cart-items']}>
+
     {cartitemsCtx.items.map((item) => (
-      <li>{item.name} {item.price} {item.quantity}</li>
+      <CartItems
+        key={item.id}
+        id={item.id}
+        name={item.name}
+        price={item.price}
+        quantity={item.quantity}
+      />
     ))}
   </ul>
   );

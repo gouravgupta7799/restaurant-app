@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from '../UI/Input';
 import classes from './MealItemForm.module.css';
-import {CartContext} from "../Store/cart-context";
+import { CartContext } from "../Store/cart-context";
 import { useContext } from 'react';
 
 export default function MealItemForm(props) {
@@ -11,7 +11,18 @@ export default function MealItemForm(props) {
   function addToCart(e) {
     e.preventDefault();
     const quantity = document.getElementById('amount' + props.id).value;
-    cartCtx.addItem({ ...props.items, quantity: quantity });
+
+    const arr = cartCtx.items.filter((it) => { return (it.id === props.items.id) })
+
+    if (arr.length === 0) {
+      cartCtx.addItem({ ...props.items, quantity: quantity });
+    } else {
+      cartCtx.items.forEach((item) => {
+        if (item.id === props.items.id) {
+          item.quantity = Number(item.quantity) + Number(quantity)
+        }
+      })
+    }
   }
 
   return (

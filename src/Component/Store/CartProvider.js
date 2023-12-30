@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import {CartContext } from './cart-context';
-
+import { CartContext } from './cart-context';
 export default function CartProvider(props) {
 
   const [items, updateItems] = useState([]);
@@ -10,13 +9,13 @@ export default function CartProvider(props) {
     updateItems([...items, item])
 
     let price = item.price;
-  
-
     updateTotal(total + price);
   }
 
-  function removeItemFromCartHandler() {
-
+  function removeItemFromCartHandler(id) {
+    const itemToRemove = items.find((item) => item.id === id);
+    const priceNumber = Number(itemToRemove.price);
+    updateTotal(total - priceNumber);
   }
 
   const cartContext = {
