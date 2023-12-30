@@ -12,8 +12,14 @@ export const CartItems = (props) => {
       </div>
       <div className={classes.actions}>
 
-        <button onClick={(e)=>console.log('clicked on add',props.id)}>+</button>
-        <button onClick={()=>console.log('clicked on remove',props.id)}>−</button>
+        <button onClick={(e) => {
+          console.log('clicked on add', props.id)
+          props.addItem(props)
+        }}>+</button>
+        <button onClick={() => {
+          console.log('clicked on remove', props.id)
+          props.deleteFromCart(props.id)
+        }}>−</button>
       </div>
     </li>
   );
