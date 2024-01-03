@@ -8,12 +8,13 @@ import { CartItems } from './CartItems';
 export default function Cart(props) {
 
   const cartitemsCtx = useContext(CartContext);
+  const hasItems = cartitemsCtx.items.length > 0
 
   function cartHandlerForAdd(item) {
-    cartitemsCtx.addItem(item)
+    cartitemsCtx.addItem({ ...item, quantity: 1 })
   }
   function cartHandlerForRemove(id) {
-    cartitemsCtx.deleteFromCart(id)
+    cartitemsCtx.removeItem(id)
   }
 
   const CartItem = (<ul className={classes['cart-items']}>
@@ -42,7 +43,7 @@ export default function Cart(props) {
       </div>
       <div className={classes.actions}>
         <button className={classes['button--alt']} onClick={props.hideCart}>Close</button>
-        <button className={classes.button}>Order</button>
+        {hasItems && <button className={classes.button}>Order</button>}
       </div>
     </Model>
   );

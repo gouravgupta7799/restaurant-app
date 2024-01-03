@@ -12,6 +12,7 @@ export default function MealItemForm(props) {
     e.preventDefault();
     const quantity = document.getElementById('amount' + props.id).value;
     cartCtx.addItem({ ...props.items, quantity: quantity });
+    document.getElementById('amount' + props.id).value = 1;
   }
 
   return (
